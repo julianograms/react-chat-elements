@@ -177,6 +177,7 @@ export class MessageList extends Component {
                                 onMeetingMessageClick={this.props.onMeetingMessageClick && ((e) => this.onMeetingMessageClick(x, i, e))}
                                 onMeetingTitleClick={this.props.onMeetingTitleClick}
                                 onMeetingVideoLinkClick={this.props.onMeetingVideoLinkClick}
+                                lang={this.props.lang}
                             />
                         ))
                     }
@@ -219,6 +220,7 @@ MessageList.defaultProps = {
     toBottomHeight: 300,
     downButton: true,
     downButtonBadge: null,
+    lang="en_US"
 };
 
 export default MessageList;

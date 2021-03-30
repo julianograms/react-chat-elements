@@ -46,7 +46,7 @@ export class MessageBox extends React.PureComponent {
 
         const dateText = this.props.date && !isNaN(this.props.date) && (
             this.props.dateString ||
-            format(this.props.date)
+            format(this.props.date, this.props.lang)
         );
 
         return (
