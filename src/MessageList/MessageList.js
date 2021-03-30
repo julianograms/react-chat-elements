@@ -220,7 +220,7 @@ MessageList.defaultProps = {
     toBottomHeight: 300,
     downButton: true,
     downButtonBadge: null,
-    lang="en_US"
+    lang: "en_US"
 };
 
 export default MessageList;
