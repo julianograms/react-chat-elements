@@ -42,7 +42,7 @@ export class MessageBox extends React.PureComponent {
         }
     }
 
-    isItMoreThanADay(date) {
+    isItMoreThanAMinute(date) {
         date = new Date(date)
         const NUMBER_OF_SECONDS = 3600000
         const now = new Date()
@@ -63,10 +63,8 @@ export class MessageBox extends React.PureComponent {
         var thatAbsoluteTime = !/(text|video|file|meeting|audio)/g.test(this.props.type) && !(this.props.type === 'location' && this.props.text);
 
 
-        const dateText = this.props.date && !isNaN(this.props.date) && (
-            this.props.dateString ||
-            (this.isItMoreThanADay(this.props.date) ? this.getFormattedMessageTime(this.props.date) : format(this.props.date, this.props.lang))
-        );
+        const dateText = this.props.date && !isNaN(this.props.date) && this.getFormattedMessageTime(this.props.date)
+        
 
         
 
@@ -256,7 +254,7 @@ export class MessageBox extends React.PureComponent {
                                         { 'non-copiable': !this.props.copiableDate },
                                     )}
                                     >
-                                        <TimeAgo 
+                                        {this.isItMoreThanAMinute(this.props.date) ? <div>{dateText}</div> : <TimeAgo 
                                             datetime={this.props.date}
                                             opts={
                                                 {
@@ -265,7 +263,8 @@ export class MessageBox extends React.PureComponent {
                                             }
                                             
                                             locale={this.props.lang}
-                                        />
+                                        />}
+                                        
                                     {
                                         this.props.copiableDate &&
                                         this.props.date &&
