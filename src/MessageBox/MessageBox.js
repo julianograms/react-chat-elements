@@ -20,6 +20,8 @@ import MdIosTime from 'react-icons/lib/md/access-time';
 import MdCheck from 'react-icons/lib/md/check';
 import MdMessage from 'react-icons/lib/md/message';
 
+import TimeAgo from "timeago-react"
+
 import {
     format,
 } from 'timeago.js';
@@ -40,14 +42,33 @@ export class MessageBox extends React.PureComponent {
         }
     }
 
+    isItMoreThanADay(date) {
+        date = new Date(date)
+        const NUMBER_OF_SECONDS = 3600000
+        const now = new Date()
+        return (now.getTime() - date.getTime() > NUMBER_OF_SECONDS)
+    }
+
+    getFormattedNumber(number) {
+        return number < 10 ? `0${number}` : number;
+      }
+
+    getFormattedMessageTime(date){
+        date = new Date(date)
+        return `${this.getFormattedNumber(date.getDate())}/${this.getFormattedNumber(date.getMonth())} ${this.getFormattedNumber(date.getHours())}:${this.getFormattedNumber(date.getMinutes())}`
+    }
+
     render() {
         var positionCls = classNames('rce-mbox', { 'rce-mbox-right': this.props.position === 'right' });
         var thatAbsoluteTime = !/(text|video|file|meeting|audio)/g.test(this.props.type) && !(this.props.type === 'location' && this.props.text);
 
+
         const dateText = this.props.date && !isNaN(this.props.date) && (
             this.props.dateString ||
-            format(this.props.date, this.props.lang)
+            (this.isItMoreThanADay(this.props.date) ? this.getFormattedMessageTime(this.props.date) : format(this.props.date, this.props.lang))
         );
+
+        
 
         return (
             <div
@@ -234,7 +255,17 @@ export class MessageBox extends React.PureComponent {
                                         { 'rce-mbox-time-block': thatAbsoluteTime },
                                         { 'non-copiable': !this.props.copiableDate },
                                     )}
-                                    data-text={this.props.copiableDate ? undefined : dateText}>
+                                    >
+                                        <TimeAgo 
+                                            datetime={this.props.date}
+                                            opts={
+                                                {
+                                                    minInterval: 60
+                                                }
+                                            }
+                                            
+                                            locale={this.props.lang}
+                                        />
                                     {
                                         this.props.copiableDate &&
                                         this.props.date &&

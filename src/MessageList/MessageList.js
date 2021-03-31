@@ -150,7 +150,10 @@ export class MessageList extends Component {
             this.props.onMeetingMoreSelect(item, i, e);
     }
 
+    
+
     render() {
+        
         return (
             <div
                 className={classNames(['rce-container-mlist', this.props.className])}>
@@ -159,7 +162,9 @@ export class MessageList extends Component {
                     onScroll={this.onScroll}
                     className='rce-mlist'>
                     {
-                        this.props.dataSource.map((x, i) => (
+                        this.props.dataSource.map((x, i) => {
+                            
+                            return (
                             <MessageBox
                                 key={i}
                                 {...x}
@@ -179,7 +184,7 @@ export class MessageList extends Component {
                                 onMeetingVideoLinkClick={this.props.onMeetingVideoLinkClick}
                                 lang={this.props.lang}
                             />
-                        ))
+                        )})
                     }
                 </div>
                 {

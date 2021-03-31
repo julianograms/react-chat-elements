@@ -21,9 +21,7 @@ import FaClose from 'react-icons/lib/fa/close';
 import FaMenu from 'react-icons/lib/md/more-vert';
 import FaSquare from 'react-icons/lib/md/crop-square';
 
-import {
-    format,
-} from 'timeago.js';
+import * as timeago from 'timeago.js';
 
 import loremIpsum from 'lorem-ipsum';
 import Identicon from 'identicon.js';
@@ -32,6 +30,29 @@ export class App extends Component {
 
     constructor(props) {
         super(props);
+        var locale = function(number, index, totalSec) {
+            // number: the time ago / time in number;
+            // index: the index of array below;
+            // totalSec: total seconds between date to be formatted and today's date;
+            return  [
+                ['agora mesmo', 'agora'],
+                ['há %s segundos', 'em %s segundos'],
+                ['há um minuto', 'em um minuto'],
+                ['há %s minutos', 'em %s minutos'],
+                ['há uma hora', 'em uma hora'],
+                ['há %s horas', 'em %s horas'],
+                ['há um dia', 'em um dia'],
+                ['há %s dias', 'em %s dias'],
+                ['há uma semana', 'em uma semana'],
+                ['há %s semanas', 'em %s semanas'],
+                ['há um mês', 'em um mês'],
+                ['há %s meses', 'em %s meses'],
+                ['há um ano', 'em um ano'],
+                ['há %s anos', 'em %s anos'],
+              ][index];
+          };
+
+        timeago.register('pt_BR', locale);
 
         this.state = {
             show: true,
@@ -345,6 +366,7 @@ export class App extends Component {
                         className='message-list'
                         lockable={true}
                         downButtonBadge={10}
+                        lang="pt_BR"
                         dataSource={this.state.messageList} />
 
                     <Input

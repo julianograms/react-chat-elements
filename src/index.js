@@ -35,3 +35,5 @@ export {
     MeetingMessage,
     AudioMessage,
 };
+// const teste = require("../dist/main.js");
+// export default teste;
