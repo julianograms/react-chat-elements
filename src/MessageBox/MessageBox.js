@@ -55,7 +55,8 @@ export class MessageBox extends React.PureComponent {
 
     getFormattedMessageTime(date){
         date = new Date(date)
-        return `${this.getFormattedNumber(date.getDate())}/${this.getFormattedNumber(date.getMonth())} ${this.getFormattedNumber(date.getHours())}:${this.getFormattedNumber(date.getMinutes())}`
+        const month = date.getMonth()+1
+        return `${this.getFormattedNumber(date.getDate())}/${this.getFormattedNumber(month)} ${this.getFormattedNumber(date.getHours())}:${this.getFormattedNumber(date.getMinutes())}`
     }
 
     render() {
@@ -253,8 +254,10 @@ export class MessageBox extends React.PureComponent {
                                         { 'rce-mbox-time-block': thatAbsoluteTime },
                                         { 'non-copiable': !this.props.copiableDate },
                                     )}
+                                    data-text={this.isItMoreThanAMinute(this.props.date) ? this.getFormattedMessageTime(this.props.date) : ""}
+                                
                                     >
-                                        {this.isItMoreThanAMinute(this.props.date) ? <div>{dateText}</div> : <TimeAgo 
+                                        {this.isItMoreThanAMinute(this.props.date) ? null : <TimeAgo 
                                             datetime={this.props.date}
                                             opts={
                                                 {
