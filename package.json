@@ -1,6 +1,6 @@
 {
   "name": "@julianograms/react-chat-elements",
-  "version": "10.14.1",
+  "version": "10.14.6",
   "description": "Reactjs chat components",
   "author": "Avare Kodcu <abdurrahmaneker58@gmail.com>",
   "main": "dist/main.js",
@@ -66,7 +66,6 @@
     "test:coverage": "npm run test -- --coverage --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/index.js"
   },
   "dependencies": {
-    "@julianograms/react-chat-elements": "https://github-registry-files.githubusercontent.com/353113539/fb1dcc00-9213-11eb-8937-53d2f5d87dff?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20210331%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210331T143628Z&X-Amz-Expires=300&X-Amz-Signature=0c60c8c528156da15608c121d9f484c19778d45d152d23e06a6e9379398ab357&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=353113539&response-content-disposition=filename%3Dreact-chat-elements-10.14.0-npm.tgz&response-content-type=application%2Foctet-stream",
     "classnames": "^2.2.5",
     "react-icons": "^2.2.5",
     "react-native-icons": "^0.7.1",
