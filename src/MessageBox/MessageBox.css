@@ -129,8 +129,10 @@
 }
 
 .rce-mbox-text {
+
     font-size: 13.6px;
     word-break: break-word;
+    white-space: pre-line
 }
 
 .rce-mbox-text:after {
