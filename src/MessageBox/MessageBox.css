@@ -4,6 +4,10 @@
     overflow-x: hidden;
     min-width: 200px;
 }
+.rce-container-mbox-right.rce-container-mbox-deletable {
+
+    padding-left: 45px;
+}
 
 .rce-mbox-forward {
     width: 30px;

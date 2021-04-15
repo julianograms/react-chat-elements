@@ -73,7 +73,7 @@ export class MessageBox extends React.PureComponent {
         return (
             <div
                 ref='message'
-                className={classNames('rce-container-mbox', this.props.className)}
+                className={classNames(`rce-container-mbox rce-container-mbox-${this.props.position} ${this.props.deletable === true ? 'rce-container-mbox-deletable':''}`, this.props.className)}
                 onClick={this.props.onClick}>
                 {
                     this.props.renderAddCmp instanceof Function &&
