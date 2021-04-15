@@ -24,6 +24,11 @@
     margin: auto;
 }
 
+.rce-mbox-forward-fb-delete:hover {
+    background-color: #e74c3c;
+    color: white;
+}
+
 .rce-mbox-forward-left {
     display: flex;
     opacity: 0;

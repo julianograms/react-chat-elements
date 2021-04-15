@@ -14,6 +14,7 @@ import AudioMessage from '../AudioMessage/AudioMessage';
 import Avatar from '../Avatar/Avatar';
 
 import FaForward from 'react-icons/lib/fa/mail-forward';
+import MdDelete from 'react-icons/lib/md/delete';
 
 import IoDoneAll from 'react-icons/lib/io/android-done-all';
 import MdIosTime from 'react-icons/lib/md/access-time';
@@ -103,6 +104,19 @@ export class MessageBox extends React.PureComponent {
                                         )}
                                         onClick={this.props.onForwardClick}>
                                             <FaForward />
+                                    </div>
+                                }
+
+{
+                                    this.props.deletable === true &&
+                                    <div
+                                        className={classNames(
+                                            'rce-mbox-forward rce-mbox-forward-fb-delete',
+                                            { 'rce-mbox-forward-right': this.props.position === 'left' },
+                                            { 'rce-mbox-forward-left': this.props.position === 'right' }
+                                        )}
+                                        onClick={this.props.onDeleteClick}>
+                                            <MdDelete />
                                     </div>
                                 }
 
@@ -347,6 +361,7 @@ MessageBox.defaultProps = {
     onTitleClick: null,
     onForwardClick: null,
     onReplyClick: null,
+    onDeleteClick: null,
     onReplyMessageClick: null,
     date: new Date(),
     data: {},

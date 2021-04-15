@@ -79,6 +79,11 @@ export class MessageList extends Component {
             this.props.onForwardClick(item, i, e);
     }
 
+    onDeleteClick(item, i, e) {
+        if (this.props.onDeleteClick instanceof Function)
+            this.props.onDeleteClick(item, i, e);
+    }
+
     onReplyClick(item, i, e) {
         if (this.props.onReplyClick instanceof Function)
             this.props.onReplyClick(item, i, e);
@@ -173,6 +178,7 @@ export class MessageList extends Component {
                                 onDownload={this.props.onDownload && ((e) => this.onDownload(x, i, e))}
                                 onTitleClick={this.props.onTitleClick && ((e) => this.onTitleClick(x, i, e))}
                                 onForwardClick={this.props.onForwardClick && ((e) => this.onForwardClick(x, i, e))}
+                                onDeleteClick={this.props.onDeleteClick && ((e) => this.onDeleteClick(x, i, e))}
                                 onReplyClick={this.props.onReplyClick && ((e) => this.onReplyClick(x, i, e))}
                                 onReplyMessageClick={this.props.onReplyMessageClick && ((e) => this.onReplyMessageClick(x, i, e))}
                                 onClick={this.props.onClick && ((e) => this.onClick(x, i, e))}
@@ -214,6 +220,7 @@ MessageList.defaultProps = {
     onTitleClick: null,
     onForwardClick: null,
     onReplyClick: null,
+    onDeleteClick: null,
     onReplyMessageClick: null,
     onMeetingMessageClick: null,
     onDownButtonClick: null,
