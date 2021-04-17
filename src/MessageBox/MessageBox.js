@@ -20,6 +20,7 @@ import IoDoneAll from 'react-icons/lib/io/android-done-all';
 import MdIosTime from 'react-icons/lib/md/access-time';
 import MdCheck from 'react-icons/lib/md/check';
 import MdMessage from 'react-icons/lib/md/message';
+import ReactMarkdown from "react-markdown"
 
 import TimeAgo from "timeago-react"
 
@@ -171,7 +172,10 @@ export class MessageBox extends React.PureComponent {
                                 {
                                     this.props.type === 'text' &&
                                     <div className="rce-mbox-text">
-                                        {this.props.text}
+                                      {
+                                        this.props.markdown ? <ReactMarkdown>{this.props.text}</ReactMarkdown> : this.props.text
+                                      }
+                                        
                                     </div>
                                 }
 

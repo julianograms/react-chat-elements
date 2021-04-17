@@ -15,6 +15,7 @@ import MeetingItem from './MeetingItem/MeetingItem';
 import MeetingList from './MeetingList/MeetingList';
 import MeetingMessage from './MeetingMessage/MeetingMessage';
 import AudioMessage from './AudioMessage/AudioMessage';
+import { Launcher } from "./FloatChat/index";
 
 export {
     MessageBox,
@@ -34,6 +35,7 @@ export {
     MeetingList,
     MeetingMessage,
     AudioMessage,
+    Launcher
 };
 // const teste = require("../dist/main.js");
 // export default teste;

@@ -173,6 +173,7 @@ export class MessageList extends Component {
                             <MessageBox
                                 key={i}
                                 {...x}
+                                markdown={this.props.markdown}
                                 onOpen={this.props.onOpen && ((e) => this.onOpen(x, i, e))}
                                 onPhotoError={this.props.onPhotoError && ((e) => this.onPhotoError(x, i, e))}
                                 onDownload={this.props.onDownload && ((e) => this.onDownload(x, i, e))}
@@ -224,6 +225,7 @@ MessageList.defaultProps = {
     onReplyMessageClick: null,
     onMeetingMessageClick: null,
     onDownButtonClick: null,
+    markdown: false,
     onOpen: null,
     onPhotoError: null,
     onDownload: null,

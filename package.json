@@ -1,77 +1,88 @@
 {
-  "name": "@julianograms/react-chat-elements",
-  "version": "10.14.13",
-  "description": "Reactjs chat components",
-  "author": "Avare Kodcu <abdurrahmaneker58@gmail.com>",
-  "main": "dist/main.js",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "devDependencies": {
-    "babel-core": "^6.0.20",
-    "babel-jest": "21.2.0",
-    "babel-loader": "7",
-    "babel-plugin-css-modules-transform": "^1.2.7",
-    "babel-plugin-transform-remove-strict-mode": "0.0.2",
-    "babel-preset-es2015": "^6.0.15",
-    "babel-preset-react": "^6.0.15",
-    "babel-preset-react-native": "4.0.0",
-    "babel-preset-stage-0": "^6.0.15",
-    "css-loader": "^0.28.5",
-    "enzyme": "^2.9.1",
-    "enzyme-to-json": "^1.5.1",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "identicon.js": "^2.3.1",
-    "jest": "21.2.1",
-    "lorem-ipsum": "^1.0.4",
-    "nwb": "^0.23.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-native": "0.49.5",
-    "react-scripts": "^1.0.10",
-    "react-test-renderer": "16.0.0-beta.5",
-    "webpack-cli": "^3.3.0",
-    "webpack-node-externals": "^1.6.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/julianograms/react-chat-elements.git"
-  },
-  "keywords": [
-    "react",
-    "reactjs",
-    "chat",
-    "css",
-    "chat",
-    "components",
-    "detaysoft",
-    "native",
-    "react-native"
-  ],
-  "license": "MIT",
-  "jest": {
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/enzyme-to-json/serializer"
-    ]
-  },
-  "bugs": {
-    "url": "https://github.com/detaysoft/react-chat-elements/issues"
-  },
-  "homepage": "https://github.com/detaysoft/react-chat-elements#readme",
-  "scripts": {
-    "start": "nwb serve-react-app ./example/index.js",
-    "start:native": "node node_modules/react-native/local-cli/cli.js start",
-    "build": "webpack --progress --profile --colors",
-    "test": "react-scripts test --env=jsdom",
-    "test:coverage": "npm run test -- --coverage --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/index.js"
-  },
-  "dependencies": {
-    "classnames": "^2.2.5",
-    "react-icons": "^2.2.5",
-    "react-native-icons": "^0.7.1",
-    "react-native-vector-icons": "^4.4.2",
-    "react-progress-bar.js": "^0.2.3",
-    "react-spinkit": "^3.0.0",
-    "timeago-react": "^3.0.2"
-  }
+    "name": "@julianograms/react-chat-elements",
+    "version": "10.14.23",
+    "description": "Reactjs chat components",
+    "author": "Avare Kodcu <abdurrahmaneker58@gmail.com>",
+    "main": "dist/main.js",
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
+    },
+    "devDependencies": {
+        "babel-core": "^6.0.20",
+        "babel-jest": "21.2.0",
+        "babel-loader": "7",
+        "babel-plugin-css-modules-transform": "^1.2.7",
+        "babel-plugin-transform-remove-strict-mode": "0.0.2",
+        "babel-preset-es2015": "^6.0.15",
+        "babel-preset-react": "^6.0.15",
+        "babel-preset-react-native": "4.0.0",
+        "babel-preset-stage-0": "^6.0.15",
+        "css-loader": "^0.28.5",
+        "enzyme": "^2.9.1",
+        "enzyme-to-json": "^1.5.1",
+        "extract-text-webpack-plugin": "^4.0.0-beta.0",
+        "file-loader": "^6.2.0",
+        "identicon.js": "^2.3.1",
+        "jest": "21.2.1",
+        "lorem-ipsum": "^1.0.4",
+        "nwb": "^0.23.0",
+        "react": "^16.6.3",
+        "react-dom": "^16.6.3",
+        "react-native": "0.49.5",
+        "react-scripts": "^1.0.10",
+        "react-test-renderer": "16.0.0-beta.5",
+        "svg-url-loader": "^7.1.1",
+        "url-loader": "^4.1.1",
+        "webpack-cli": "^3.3.0",
+        "webpack-node-externals": "^1.6.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/julianograms/react-chat-elements.git"
+    },
+    "keywords": [
+        "react",
+        "reactjs",
+        "chat",
+        "css",
+        "chat",
+        "components",
+        "detaysoft",
+        "native",
+        "react-native"
+    ],
+    "license": "MIT",
+    "jest": {
+        "snapshotSerializers": [
+            "<rootDir>/node_modules/enzyme-to-json/serializer"
+        ]
+    },
+    "bugs": {
+        "url": "https://github.com/detaysoft/react-chat-elements/issues"
+    },
+    "homepage": "https://github.com/detaysoft/react-chat-elements#readme",
+    "scripts": {
+        "start": "nwb serve-react-app ./example/index.js",
+        "start:native": "node node_modules/react-native/local-cli/cli.js start",
+        "build": "webpack --progress --profile --colors",
+        "test": "react-scripts test --env=jsdom",
+        "test:coverage": "npm run test -- --coverage --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/index.js",
+        "yalc:reload": "yarn build && yalc publish && yalc push"
+    },
+    "dependencies": {
+        "classnames": "^2.2.5",
+        "emoji-js": "3.2.2",
+        "gh-pages": "^1.2.0",
+        "prop-types": "15.5.10",
+        "react-highlight.js": "1.0.5",
+        "react-icons": "^2.2.5",
+        "react-linkify": "^0.2.1",
+        "react-markdown": "^6.0.0",
+        "react-native-icons": "^0.7.1",
+        "react-native-vector-icons": "^4.4.2",
+        "react-progress-bar.js": "^0.2.3",
+        "react-spinkit": "^3.0.0",
+        "socket.io-client": "2.0.3",
+        "timeago-react": "^3.0.2"
+    }
 }
