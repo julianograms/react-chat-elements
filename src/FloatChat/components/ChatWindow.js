@@ -54,7 +54,6 @@ ChatWindow.propTypes = {
   onClose: PropTypes.func.isRequired,
   onFilesSelected: PropTypes.func,
   onUserInputSubmit: PropTypes.func.isRequired,
-  onDeleteClick: PropTypes.func.isRequired,
   showEmoji: PropTypes.bool,
   markdown: PropTypes.bool
 };
