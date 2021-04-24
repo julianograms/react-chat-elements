@@ -14,7 +14,7 @@ class Launcher extends Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(nextProps) {
         if (this.props.mute) {
             return;
         }
