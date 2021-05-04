@@ -63,6 +63,7 @@ class UserInput extends Component {
         data: { text },
       });
       this.userInput.innerHTML = "";
+      this.setState({ inputHasText: false });
     }
   }
 
