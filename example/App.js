@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
     MessageBox,
     ChatItem,
@@ -13,63 +13,82 @@ import {
     Dropdown,
     Popup,
     MeetingList,
-} from '../src';
+    Launcher,
+} from "../src";
 
-import FaSearch from 'react-icons/lib/fa/search';
-import FaComments from 'react-icons/lib/fa/comments';
-import FaClose from 'react-icons/lib/fa/close';
-import FaMenu from 'react-icons/lib/md/more-vert';
-import FaSquare from 'react-icons/lib/md/crop-square';
+import FaSearch from "react-icons/lib/fa/search";
+import FaComments from "react-icons/lib/fa/comments";
+import FaClose from "react-icons/lib/fa/close";
+import FaMenu from "react-icons/lib/md/more-vert";
+import FaSquare from "react-icons/lib/md/crop-square";
 
-import * as timeago from 'timeago.js';
+import * as timeago from "timeago.js";
 
-import loremIpsum from 'lorem-ipsum';
-import Identicon from 'identicon.js';
+import loremIpsum from "lorem-ipsum";
+import Identicon from "identicon.js";
 
 export class App extends Component {
-
     constructor(props) {
         super(props);
-        var locale = function(number, index, totalSec) {
+        var locale = function (number, index, totalSec) {
             // number: the time ago / time in number;
             // index: the index of array below;
             // totalSec: total seconds between date to be formatted and today's date;
-            return  [
-                ['agora mesmo', 'agora'],
-                ['há %s segundos', 'em %s segundos'],
-                ['há um minuto', 'em um minuto'],
-                ['há %s minutos', 'em %s minutos'],
-                ['há uma hora', 'em uma hora'],
-                ['há %s horas', 'em %s horas'],
-                ['há um dia', 'em um dia'],
-                ['há %s dias', 'em %s dias'],
-                ['há uma semana', 'em uma semana'],
-                ['há %s semanas', 'em %s semanas'],
-                ['há um mês', 'em um mês'],
-                ['há %s meses', 'em %s meses'],
-                ['há um ano', 'em um ano'],
-                ['há %s anos', 'em %s anos'],
-              ][index];
-          };
+            return [
+                ["agora mesmo", "agora"],
+                ["há %s segundos", "em %s segundos"],
+                ["há um minuto", "em um minuto"],
+                ["há %s minutos", "em %s minutos"],
+                ["há uma hora", "em uma hora"],
+                ["há %s horas", "em %s horas"],
+                ["há um dia", "em um dia"],
+                ["há %s dias", "em %s dias"],
+                ["há uma semana", "em uma semana"],
+                ["há %s semanas", "em %s semanas"],
+                ["há um mês", "em um mês"],
+                ["há %s meses", "em %s meses"],
+                ["há um ano", "em um ano"],
+                ["há %s anos", "em %s anos"],
+            ][index];
+        };
 
-        timeago.register('pt_BR', locale);
+        timeago.register("pt_BR", locale);
 
         this.state = {
             show: true,
-            list: 'chat',
-            messageList: [],
+            list: "chat",
+            messageList: [
+              {
+                  author: "me",
+                  type: "photo",
+                  deletable: true,
+                  
+                  time: new Date(),
+                  
+                  data: {
+                    height: 250,
+                    width: 250,
+                    uri: 'https://s3.amazonaws.com/ladecora.platform/projects/6063917978ead0686a0e0bc9/preview/V01-01.png',
+                    status: {
+                        click: false,
+                        text: "bomdia",
+                        loading: 0,
+                    }
+                }
+              },
+          ],
         };
 
         this.addMessage = this.addMessage.bind(this);
     }
 
     UNSAFE_componentWillMount() {
-        this.addMessage(7)
+        this.addMessage(7);
     }
 
     getRandomColor() {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
+        var letters = "0123456789ABCDEF";
+        var color = "#";
         for (var i = 0; i < 6; i++) {
             color += letters[Math.floor(Math.random() * 16)];
         }
@@ -77,195 +96,262 @@ export class App extends Component {
     }
 
     token() {
-        return (parseInt(Math.random() * 10 % 8));
+        return parseInt((Math.random() * 10) % 8);
     }
 
     photo(size) {
         return new Identicon(String(Math.random()) + String(Math.random()), {
             margin: 0,
             size: size || 20,
-        }).toString()
+        }).toString();
     }
 
     random(type, mtype) {
         switch (type) {
-            case 'message':
+            case "message":
                 mtype = mtype || this.token();
-                var status = 'waiting';
+                var status = "waiting";
                 switch (mtype) {
                     case 0:
-                        mtype = 'photo';
-                        status = 'sent';
+                        mtype = "photo";
+                        status = "sent";
                         break;
                     case 1:
-                        mtype = 'file';
-                        status = 'sent';
+                        mtype = "file";
+                        status = "sent";
                         break;
                     case 2:
-                        mtype = 'system';
-                        status = 'received';
+                        mtype = "system";
+                        status = "received";
                         break;
                     case 3:
-                        mtype = 'location';
+                        mtype = "location";
                         break;
                     case 4:
-                        mtype = 'spotify';
+                        mtype = "spotify";
                         break;
                     case 5:
-                        mtype = 'meeting';
+                        mtype = "meeting";
                         break;
                     case 6:
-                        mtype = 'video';
-                        status = 'sent';
+                        mtype = "video";
+                        status = "sent";
                         break;
                     case 7:
-                        mtype = 'audio';
+                        mtype = "audio";
                         break;
                     default:
-                        mtype = 'text';
-                        status = 'read';
+                        mtype = "text";
+                        status = "read";
                         break;
                 }
 
                 return {
-                    position: (this.token() >= 1 ? 'right' : 'left'),
+                    position: this.token() >= 1 ? "right" : "left",
                     forwarded: true,
                     replyButton: true,
-                    reply: this.token() >= 1 ? ({
-                        photoURL: this.token() >= 1 ? `data:image/png;base64,${this.photo(150)}` : null,
-                        title: loremIpsum({ count: 2, units: 'words' }),
-                        titleColor: this.getRandomColor(),
-                        message: loremIpsum({ count: 1, units: 'sentences' }),
-                    }) : null,
-                    meeting: this.token() >= 1 ? ({
-                        subject: loremIpsum({ count: 2, units: 'words' }),
-                        title: loremIpsum({ count: 2, units: 'words' }),
-                        date: +new Date(),
-                        collapseTitle: loremIpsum({ count: 2, units: 'words' }),
-                        participants: Array(this.token() + 6).fill(1).map(x => ({
-                            id: parseInt(Math.random() * 10 % 7),
-                            title: loremIpsum({ count: 1, units: 'words' }),
-                        })),
-                        dataSource: Array(this.token() + 5).fill(1).map(x => ({
-                            id: String(Math.random()),
-                            avatar: `data:image/png;base64,${this.photo()}`,
-                            message: loremIpsum({ count: 1, units: 'sentences' }),
-                            title: loremIpsum({ count: 2, units: 'words' }),
-                            avatarFlexible: true,
-                            date: +new Date(),
-                            event: {
-                                title: loremIpsum({ count: 2, units: 'words' }),
-                                avatars: Array(this.token() + 2).fill(1).map(x => ({
-                                    src: `data:image/png;base64,${this.photo()}`,
-                                    title: "react, rce"
-                                })),
-                                avatarsLimit: 5,
-                            },
-                            record: {
-                                avatar: `data:image/png;base64,${this.photo()}`,
-                                title: loremIpsum({ count: 1, units: 'words' }),
-                                savedBy: 'Kaydeden: ' + loremIpsum({ count: 2, units: 'words' }),
-                                time: new Date().toLocaleString(),
-                            },
-                        })),
-                    }) : null,
+                    reply:
+                        this.token() >= 1
+                            ? {
+                                  photoURL:
+                                      this.token() >= 1
+                                          ? `data:image/png;base64,${this.photo(
+                                                150
+                                            )}`
+                                          : null,
+                                  title: loremIpsum({
+                                      count: 2,
+                                      units: "words",
+                                  }),
+                                  titleColor: this.getRandomColor(),
+                                  message: loremIpsum({
+                                      count: 1,
+                                      units: "sentences",
+                                  }),
+                              }
+                            : null,
+                    meeting:
+                        this.token() >= 1
+                            ? {
+                                  subject: loremIpsum({
+                                      count: 2,
+                                      units: "words",
+                                  }),
+                                  title: loremIpsum({
+                                      count: 2,
+                                      units: "words",
+                                  }),
+                                  date: +new Date(),
+                                  collapseTitle: loremIpsum({
+                                      count: 2,
+                                      units: "words",
+                                  }),
+                                  participants: Array(this.token() + 6)
+                                      .fill(1)
+                                      .map((x) => ({
+                                          id: parseInt(
+                                              (Math.random() * 10) % 7
+                                          ),
+                                          title: loremIpsum({
+                                              count: 1,
+                                              units: "words",
+                                          }),
+                                      })),
+                                  dataSource: Array(this.token() + 5)
+                                      .fill(1)
+                                      .map((x) => ({
+                                          id: String(Math.random()),
+                                          avatar: `data:image/png;base64,${this.photo()}`,
+                                          message: loremIpsum({
+                                              count: 1,
+                                              units: "sentences",
+                                          }),
+                                          title: loremIpsum({
+                                              count: 2,
+                                              units: "words",
+                                          }),
+                                          avatarFlexible: true,
+                                          date: +new Date(),
+                                          event: {
+                                              title: loremIpsum({
+                                                  count: 2,
+                                                  units: "words",
+                                              }),
+                                              avatars: Array(this.token() + 2)
+                                                  .fill(1)
+                                                  .map((x) => ({
+                                                      src: `data:image/png;base64,${this.photo()}`,
+                                                      title: "react, rce",
+                                                  })),
+                                              avatarsLimit: 5,
+                                          },
+                                          record: {
+                                              avatar: `data:image/png;base64,${this.photo()}`,
+                                              title: loremIpsum({
+                                                  count: 1,
+                                                  units: "words",
+                                              }),
+                                              savedBy:
+                                                  "Kaydeden: " +
+                                                  loremIpsum({
+                                                      count: 2,
+                                                      units: "words",
+                                                  }),
+                                              time: new Date().toLocaleString(),
+                                          },
+                                      })),
+                              }
+                            : null,
                     type: mtype,
-                    theme: 'white',
-                    view: 'list',
-                    title: loremIpsum({ count: 2, units: 'words' }),
+                    theme: "white",
+                    view: "list",
+                    title: loremIpsum({ count: 2, units: "words" }),
                     titleColor: this.getRandomColor(),
-                    text: mtype === 'spotify' ? 'spotify:track:0QjjaCaXE45mvhCnV3C0TA' : loremIpsum({ count: 1, units: 'sentences' }),
+                    text:
+                        mtype === "spotify"
+                            ? "spotify:track:0QjjaCaXE45mvhCnV3C0TA"
+                            : loremIpsum({ count: 1, units: "sentences" }),
                     data: {
-                        videoURL: this.token() >= 1 ? 'https://www.w3schools.com/html/mov_bbb.mp4' : 'http://www.exit109.com/~dnn/clips/RW20seconds_1.mp4',
-                        audioURL: 'https://www.w3schools.com/html/horse.mp3',
+                        videoURL:
+                            this.token() >= 1
+                                ? "https://www.w3schools.com/html/mov_bbb.mp4"
+                                : "http://www.exit109.com/~dnn/clips/RW20seconds_1.mp4",
+                        audioURL: "https://www.w3schools.com/html/horse.mp3",
                         uri: `data:image/png;base64,${this.photo(150)}`,
                         status: {
                             click: true,
                             loading: 0.5,
-                            download: mtype === 'video',
+                            download: mtype === "video",
                         },
                         size: "100MB",
                         width: 300,
                         height: 300,
-                        latitude: '37.773972',
-                        longitude: '-122.431297',
-                        staticURL: 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-circle+FF0000(LONGITUDE,LATITUDE)/LONGITUDE,LATITUDE,ZOOM/270x200@2x?access_token=KEY',
+                        latitude: "37.773972",
+                        longitude: "-122.431297",
+                        staticURL:
+                            "https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-circle+FF0000(LONGITUDE,LATITUDE)/LONGITUDE,LATITUDE,ZOOM/270x200@2x?access_token=KEY",
                     },
                     onLoad: () => {
-                        console.log('Photo loaded');
+                        console.log("Photo loaded");
                     },
                     status: status,
                     date: +new Date(),
                     onReplyMessageClick: () => {
-                        console.log('onReplyMessageClick');
+                        console.log("onReplyMessageClick");
                     },
                     avatar: `data:image/png;base64,${this.photo()}`,
                 };
-            case 'chat':
+            case "chat":
                 return {
                     id: String(Math.random()),
                     avatar: `data:image/png;base64,${this.photo()}`,
                     avatarFlexible: true,
-                    statusColor: 'lightgreen',
-                    statusColorType: parseInt(Math.random() * 100 % 2) === 1 ? 'encircle' : undefined,
-                    alt: loremIpsum({ count: 2, units: 'words' }),
-                    title: loremIpsum({ count: 2, units: 'words' }),
+                    statusColor: "lightgreen",
+                    statusColorType:
+                        parseInt((Math.random() * 100) % 2) === 1
+                            ? "encircle"
+                            : undefined,
+                    alt: loremIpsum({ count: 2, units: "words" }),
+                    title: loremIpsum({ count: 2, units: "words" }),
                     date: new Date(),
-                    subtitle: loremIpsum({ count: 1, units: 'sentences' }),
-                    unread: parseInt(Math.random() * 10 % 3),
+                    subtitle: loremIpsum({ count: 1, units: "sentences" }),
+                    unread: parseInt((Math.random() * 10) % 3),
                     dropdownMenu: (
                         <Dropdown
                             animationPosition="norteast"
-                            title='Dropdown Title'
+                            title="Dropdown Title"
                             buttonProps={{
                                 type: "transparent",
                                 color: "#cecece",
                                 icon: {
                                     component: <FaMenu />,
                                     size: 24,
-                                }
+                                },
                             }}
                             items={[
                                 {
                                     icon: {
                                         component: <FaSquare />,
-                                        float: 'left',
-                                        color: 'red',
+                                        float: "left",
+                                        color: "red",
                                         size: 22,
                                     },
-                                    text: 'Menu Item'
+                                    text: "Menu Item",
                                 },
                                 {
                                     icon: {
-                                        component: <FaSquare/>,
-                                        float: 'left',
-                                        color: 'purple',
+                                        component: <FaSquare />,
+                                        float: "left",
+                                        color: "purple",
                                         size: 22,
                                     },
-                                    text: 'Menu Item'
+                                    text: "Menu Item",
                                 },
                                 {
                                     icon: {
-                                        component: <FaSquare/>,
-                                        float: 'left',
-                                        color: 'yellow',
+                                        component: <FaSquare />,
+                                        float: "left",
+                                        color: "yellow",
                                         size: 22,
                                     },
-                                    text: 'Menu Item'
+                                    text: "Menu Item",
                                 },
-                            ]} />
+                            ]}
+                        />
                     ),
                 };
-            case 'meeting':
+            case "meeting":
                 return {
                     id: String(Math.random()),
                     lazyLoadingImage: `data:image/png;base64,${this.photo()}`,
                     avatarFlexible: true,
-                    subject: loremIpsum({ count: 1, units: 'sentences' }),
+                    subject: loremIpsum({ count: 1, units: "sentences" }),
                     date: new Date(),
-                    avatars: Array(this.token() + 2).fill(1).map(x => ({
-                        src: `data:image/png;base64,${this.photo()}`,
-                    })),
+                    avatars: Array(this.token() + 2)
+                        .fill(1)
+                        .map((x) => ({
+                            src: `data:image/png;base64,${this.photo()}`,
+                        })),
                     closable: true,
                 };
         }
@@ -281,98 +367,115 @@ export class App extends Component {
 
     render() {
         var arr = [];
-        for (var i = 0; i < 5; i++)
-            arr.push(i);
+        for (var i = 0; i < 5; i++) arr.push(i);
 
-        var chatSource = arr.map(x => this.random('chat'));
-        var meetingSource = arr.map(x => this.random('meeting'));
+        var chatSource = arr.map((x) => this.random("chat"));
+        var meetingSource = arr.map((x) => this.random("meeting"));
 
         return (
-            <div className='container'>
-                <div
-                    className='chat-list'>
+            <div className="container">
+                <div className="chat-list">
                     <SideBar
                         top={
                             <div>
                                 <Popup
                                     // show={this.state.show}
-                                    header='Lorem ipsum dolor sit amet.'
-                                    headerButtons={[{
-                                        type: 'transparent',
-                                        color: 'black',
-                                        onClick: () => {
-                                            this.setState({ show: false })
+                                    header="Lorem ipsum dolor sit amet."
+                                    headerButtons={[
+                                        {
+                                            type: "transparent",
+                                            color: "black",
+                                            onClick: () => {
+                                                this.setState({ show: false });
+                                            },
+                                            icon: {
+                                                component: <FaClose />,
+                                                size: 18,
+                                            },
                                         },
-                                        icon: {
-                                            component: <FaClose />,
-                                            size: 18
-                                        }
-                                    }]}
-                                    text='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem animi veniam voluptas eius!'
-                                    footerButtons={[{
-                                        color: 'white',
-                                        backgroundColor: '#ff5e3e',
-                                        text: "Vazgeç",
-                                    }, {
-                                        color: 'white',
-                                        backgroundColor: 'lightgreen',
-                                        text: "Tamam",
-                                    }]} />
+                                    ]}
+                                    text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem animi veniam voluptas eius!"
+                                    footerButtons={[
+                                        {
+                                            color: "white",
+                                            backgroundColor: "#ff5e3e",
+                                            text: "Vazgeç",
+                                        },
+                                        {
+                                            color: "white",
+                                            backgroundColor: "lightgreen",
+                                            text: "Tamam",
+                                        },
+                                    ]}
+                                />
 
                                 <Button
-                                    type='transparent'
-                                    color='black'
-                                    text={this.state.list === 'chat' ? 'MeetingList' : 'ChatList'}
+                                    type="transparent"
+                                    color="black"
+                                    text={
+                                        this.state.list === "chat"
+                                            ? "MeetingList"
+                                            : "ChatList"
+                                    }
                                     onClick={() => {
                                         this.setState({
-                                            list: this.state.list === 'chat' ? 'meeeting' : 'chat',
+                                            list:
+                                                this.state.list === "chat"
+                                                    ? "meeeting"
+                                                    : "chat",
                                         });
-                                    }}/>
+                                    }}
+                                />
                             </div>
                         }
                         center={
-                            this.state.list === 'chat' ?
-                            <ChatList
-                                dataSource={chatSource} />
-                            :
-                            <MeetingList
-                                onMeetingClick={console.log}
-                                onShareClick={console.log}
-                                dataSource={meetingSource} />
+                            this.state.list === "chat" ? (
+                                <ChatList dataSource={chatSource} />
+                            ) : (
+                                <MeetingList
+                                    onMeetingClick={console.log}
+                                    onShareClick={console.log}
+                                    dataSource={meetingSource}
+                                />
+                            )
                         }
                         bottom={
                             <span>
                                 <Button
-                                    type='transparent'
-                                    color='black'
+                                    type="transparent"
+                                    color="black"
                                     icon={{
                                         component: <FaComments />,
-                                        size: 18
-                                    }} />
+                                        size: 18,
+                                    }}
+                                />
                                 <Button
-                                    type='transparent'
-                                    color='black'
+                                    type="transparent"
+                                    color="black"
                                     icon={{
                                         component: <FaSearch />,
-                                        size: 18
-                                    }} />
+                                        size: 18,
+                                    }}
+                                />
                                 <Button text="Count"></Button>
                             </span>
-                        } />
+                        }
+                    />
                 </div>
-                <div
-                    className='right-panel'>
+
+                <div className="right-panel">
                     <MessageList
-                        className='message-list'
+                        className="message-list"
                         lockable={true}
                         downButtonBadge={10}
                         lang="pt_BR"
-                        dataSource={this.state.messageList} />
+                        dataSource={this.state.messageList}
+                    />
 
                     <Input
                         placeholder="Mesajınızı buraya yazınız."
                         defaultValue=""
-                        ref='input'
+                        ref="input"
                         multiline={true}
                         // buttonsFloat='left'
                         onKeyPress={(e) => {
@@ -388,10 +491,64 @@ export class App extends Component {
                         }}
                         rightButtons={
                             <Button
-                                text='Gönder'
-                                onClick={() => this.addMessage()} />
-                        } />
+                                text="Gönder"
+                                onClick={() => this.addMessage()}
+                            />
+                        }
+                    />
                 </div>
+                <Launcher
+                    agentProfile={{
+                        teamName: "OI",
+                        imageUrl: "",
+                    }}
+                    isOpen={true}
+                    onDownload={(message) => {
+                      // for non-IE
+                      const fileURL = message.data.uri
+                      const fileName = message.data.uri.match(/.*\/(.*$)/)[1]
+                      if (!window.ActiveXObject) {
+                        var save = document.createElement("a");
+                        save.href = fileURL;
+                        save.target = "_self";
+                        var filename = fileURL.substring(fileURL.lastIndexOf("/") + 1);
+                        save.download = fileName || filename;
+                        if (
+                          navigator.userAgent.toLowerCase().match(/(ipad|iphone|safari)/) &&
+                          navigator.userAgent.search("Chrome") < 0
+                        ) {
+                          document.location = save.href;
+                          // window event not working here
+                        } else {
+                          var evt = new MouseEvent("click", {
+                            view: window,
+                            bubbles: true,
+                            cancelable: false,
+                          });
+                          save.dispatchEvent(evt);
+                          (window.URL || window.webkitURL).revokeObjectURL(save.href);
+                        }
+                      }
+
+                      // for IE < 11
+                      else if (!!window.ActiveXObject && document.execCommand) {
+                        var _window = window.open(fileURL, "_blank");
+                        _window.document.close();
+                        _window.document.execCommand("SaveAs", true, fileName || fileURL);
+                        _window.close();
+                      }
+                    }}
+                    onMessageWasSent={() => {}}
+                    
+                    messageList={this.state.messageList}
+                    
+                    newMessagesCount={1}
+                    showEmoji={false}
+                    placeholder="Escreva sua mensagem..."
+                    handleClick={() => {
+                        console.log("toggle");
+                    }}
+                />
             </div>
         );
     }

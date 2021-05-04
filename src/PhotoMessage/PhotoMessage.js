@@ -4,11 +4,21 @@ import './PhotoMessage.css';
 
 import FaCloudDownload from 'react-icons/lib/fa/cloud-download';
 import FaError from 'react-icons/lib/fa/exclamation-triangle';
+// import Loading from "../assets/img/loading.svg"
+const Loading = require('../assets/img/loading.svg')
 
 const ProgressBar = require('react-progress-bar.js');
 const Circle = ProgressBar.Circle;
 
 export class PhotoMessage extends React.PureComponent {
+    constructor(props) {
+      super(props);
+
+      this.state = {
+          message: props,
+      };
+    }
+
     render() {
         var progressOptions = {
             strokeWidth: 2.3,
@@ -63,6 +73,14 @@ export class PhotoMessage extends React.PureComponent {
                                     onClick={this.props.onDownload}
                                     className="rce-mbox-photo--img__block-item rce-mbox-photo--download">
                                     <FaCloudDownload/>
+                                </button>
+                            }
+                            {
+                                !!this.props.data.status.isSending &&
+                                <button
+                                    disabled
+                                    className="rce-mbox-photo--img__block-item rce-mbox-photo--download">
+                                    <img src={Loading} style={{width: "40px"}} />
                                 </button>
                             }
                             {

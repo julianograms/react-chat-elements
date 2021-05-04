@@ -21,13 +21,14 @@ class MessageList extends Component {
                     markdown={this.props.markdown}
                     toBottomHeight={"100%"}
                     onDeleteClick={this.props.onDeleteClick}
+                    onDownload={this.props.onDownload}
                     dataSource={this.props.messages.map((message) => {
                         return {
                             ...message,
                             position:
                                 message.author === "me" ? "right" : "left",
-                            type: "text",
-                            text: message.data.text,
+                            // type: "text",
+                            // text: message.data.text,
                             deletable: message.deletable,
                             date: message.time,
                         };

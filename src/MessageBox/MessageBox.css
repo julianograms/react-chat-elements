@@ -82,6 +82,7 @@
 }
 
 .rce-mbox {
+    max-width: 100%;
     position: relative;
     background: white;
     border-radius: 5px;

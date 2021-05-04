@@ -33,6 +33,7 @@ class ChatWindow extends Component {
         />
         <MessageList
           onDeleteClick={this.props.onDeleteClick}
+          onDownload={this.props.onDownload}
           messages={messageList}
           imageUrl={this.props.agentProfile.imageUrl}
           markdown={this.props.markdown}

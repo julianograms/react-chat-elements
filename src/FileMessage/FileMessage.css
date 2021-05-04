@@ -1,8 +1,10 @@
 .rce-mbox-file {
     padding-bottom: 13px;
+
 }
 
 .rce-mbox-file > button {
+    max-width: 100%;
     background: #e9e9e9;
     display: flex;
     border-radius: 5px;
@@ -11,7 +13,7 @@
     margin-left: -6px;
     align-items: center;
     min-height: 52px;
-    max-width: 500px;
+    /* max-width: 500px; */
     padding: 5px 0;
     cursor: pointer;
     user-select: none;

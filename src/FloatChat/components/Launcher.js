@@ -65,6 +65,7 @@ class Launcher extends Component {
                     onUserInputSubmit={this.props.onMessageWasSent}
                     onFilesSelected={this.props.onFilesSelected}
                     onDeleteClick={this.props.onDeleteClick}
+                    onDownload={this.props.onDownload}
                     agentProfile={this.props.agentProfile}
                     markdown={this.props.markdown}
                     isOpen={isOpen}

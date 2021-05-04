@@ -7,6 +7,7 @@ import FaFile from 'react-icons/lib/fa/file';
 
 const ProgressBar = require('react-progress-bar.js');
 const Circle = ProgressBar.Circle;
+const Loading = require('../assets/img/loading.svg')
 
 export class FileMessage extends React.PureComponent {
 
@@ -68,6 +69,12 @@ export class FileMessage extends React.PureComponent {
                             !this.props.data.status.click &&
                             <FaCloudDownload
                                 color='#aaa'/>
+                        }
+                        {
+                            !error &&
+                            this.props.data.status &&
+                            this.props.data.status.isSending &&
+                            <img src={Loading} style={{width: "40px"}} />
                         }
                         {
                             !error &&
