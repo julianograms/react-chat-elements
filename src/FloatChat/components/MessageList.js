@@ -27,8 +27,6 @@ class MessageList extends Component {
                             ...message,
                             position:
                                 message.author === "me" ? "right" : "left",
-                            // type: "text",
-                            // text: message.data.text,
                             deletable: message.deletable,
                             date: message.time,
                         };

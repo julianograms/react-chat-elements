@@ -11,6 +11,16 @@
   display: flex;
 }
 
+.sc-header-description {
+  background: var(--newbackground-color);
+  color: white;
+  padding-top: 8px;
+  font-size: 12px;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+}
+
 .sc-header--img {
   border-radius: 50%;
   align-self: center;

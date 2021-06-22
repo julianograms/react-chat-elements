@@ -4,6 +4,7 @@ import closeIcon from "./../assets/close-icon.png";
 class Header extends Component {
     render() {
         return (
+          
             <div className="sc-header">
                 <img
                     className="sc-header--img"
@@ -12,7 +13,8 @@ class Header extends Component {
                 />
 
                 <div className="sc-header--team-name">
-                    {this.props.teamName}
+                    <div>{this.props.teamName}</div>
+                    <div className="sc-header-description">{this.props.description}</div>
                 </div>
                 <div
                     className="sc-header--close-button"

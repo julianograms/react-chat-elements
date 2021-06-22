@@ -28,6 +28,7 @@ class ChatWindow extends Component {
       <div className={classList.join(' ')}>
         <Header
           teamName={this.props.agentProfile.teamName}
+          description={this.props.agentProfile.description}
           imageUrl={this.props.agentProfile.imageUrl}
           onClose={this.props.onClose}
         />
