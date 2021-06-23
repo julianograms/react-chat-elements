@@ -30,6 +30,8 @@ class UserInput extends Component {
   handleKeyUp(event) {
     const inputHasText =
       event.target.innerHTML.length !== 0 && event.target.innerText !== "\n";
+
+    
     this.setState({ inputHasText });
   }
 
@@ -146,6 +148,12 @@ class UserInput extends Component {
           }}
           onKeyDown={this.handleKeyDown.bind(this)}
           onKeyUp={this.handleKeyUp.bind(this)}
+          onPaste={(event) => {
+            if(event.clipboardData.files.length){
+              event.stopPropagation();
+              event.preventDefault();
+            } 
+          }}
           contentEditable="true"
           placeholder={this.props.placeholder}
           className="sc-user-input--text"
